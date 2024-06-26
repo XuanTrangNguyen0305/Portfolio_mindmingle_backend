@@ -1,0 +1,20 @@
+[
+  {
+    "userId": 1,
+    "menuItemId": 1,
+    "sugarLevelId": 2,
+    "iceLevelId": 2
+  },
+  {
+    "userId": 2,
+    "menuItemId": 2,
+    "sugarLevelId": 3,
+    "iceLevelId": 1
+  },
+  {
+    "userId": 3,
+    "menuItemId": 3,
+    "sugarLevelId": 1,
+    "iceLevelId": 3
+  }
+]

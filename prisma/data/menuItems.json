@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Classic Milk Tea",
+    "imgURL": "https://picsum.photos/200/300?random=1"
+  },
+  {
+    "name": "Taro Milk Tea",
+    "imgURL": "https://picsum.photos/200/300?random=2"
+  },
+  {
+    "name": "Matcha Milk Tea",
+    "imgURL": "https://picsum.photos/200/300?random=3"
+  },
+  {
+    "name": "Brown Sugar Milk Tea",
+    "imgURL": "https://picsum.photos/200/300?random=4"
+  },
+  {
+    "name": "Honeydew Milk Tea",
+    "imgURL": "https://picsum.photos/200/300?random=5"
+  },
+  {
+    "name": "Thai Milk Tea",
+    "imgURL": "https://picsum.photos/200/300?random=6"
+  },
+  {
+    "name": "Strawberry Milk Tea",
+    "imgURL": "https://picsum.photos/200/300?random=7"
+  },
+  {
+    "name": "Mango Milk Tea",
+    "imgURL": "https://picsum.photos/200/300?random=8"
+  },
+  {
+    "name": "Oolong Milk Tea",
+    "imgURL": "https://picsum.photos/200/300?random=9"
+  },
+  {
+    "name": "Almond Milk Tea",
+    "imgURL": "https://picsum.photos/200/300?random=10"
+  }
+]
