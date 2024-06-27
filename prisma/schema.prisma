@@ -15,23 +15,64 @@ model User {
   orders   Order[]
 }
 
-model Order {
+model MenuItem {
   id           Int        @id @default(autoincrement())
-  user         User       @relation(fields: [userId], references: [id])
-  userId       Int
-  menuItem     MenuItem   @relation(fields: [menuItemId], references: [id])
-  menuItemId   Int
-  sugarLevel   SugarLevel @relation(fields: [sugarLevelId], references: [id])
-  sugarLevelId Int
-  iceLevel     IceLevel   @relation(fields: [iceLevelId], references: [id])
-  iceLevelId   Int
+  name         String
+  imgURL       String
+  description  String
+  ingredientId Int
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  sizeId       Int
+  size         Size       @relation(fields: [sizeId], references: [id])
+  price        Float?
+  Order        Order[]
 }
 
-model MenuItem {
-  id     Int     @id @default(autoincrement())
-  name   String
-  imgURL String
-  Order  Order[]
+model Size {
+  id       Int        @id @default(autoincrement())
+  name     String
+  price    Float?
+  MenuItem MenuItem[]
+}
+
+model Ingredient {
+  id        Int        @id @default(autoincrement())
+  toppingId Int?
+  teaId     Int
+  milkId    Int?
+  flavorId  Int?
+  topping   Topping?   @relation(fields: [toppingId], references: [id])
+  tea       Tea        @relation(fields: [teaId], references: [id])
+  milk      Milk?      @relation(fields: [milkId], references: [id])
+  flavor    Flavor?    @relation(fields: [flavorId], references: [id])
+  MenuItem  MenuItem[]
+}
+
+model Topping {
+  id          Int          @id @default(autoincrement())
+  name        String
+  price       Float
+  ingredients Ingredient[]
+}
+
+model Tea {
+  id          Int          @id @default(autoincrement())
+  name        String
+  price       Float?
+  ingredients Ingredient[]
+}
+
+model Milk {
+  id          Int          @id @default(autoincrement())
+  name        String
+  price       Float?
+  ingredients Ingredient[]
+}
+
+model Flavor {
+  id          Int          @id @default(autoincrement())
+  name        String
+  ingredients Ingredient[]
 }
 
 model SugarLevel {
@@ -44,4 +85,25 @@ model IceLevel {
   id    Int     @id @default(autoincrement())
   name  String
   Order Order[]
+}
+
+model Cup {
+  id    Int     @id @default(autoincrement())
+  name  String
+  price Float?
+  Order Order[]
+}
+
+model Order {
+  id           Int        @id @default(autoincrement())
+  user         User       @relation(fields: [userId], references: [id])
+  userId       Int
+  menuItem     MenuItem?  @relation(fields: [menuItemId], references: [id])
+  menuItemId   Int?
+  sugarLevel   SugarLevel @relation(fields: [sugarLevelId], references: [id])
+  sugarLevelId Int
+  iceLevel     IceLevel   @relation(fields: [iceLevelId], references: [id])
+  cupId        Int
+  cup          Cup        @relation(fields: [cupId], references: [id])
+  iceLevelId   Int
 }

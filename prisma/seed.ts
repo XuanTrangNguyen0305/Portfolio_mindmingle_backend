@@ -4,6 +4,13 @@ import ordersData from "./data/orders.json";
 import menuItemsData from "./data/menuItems.json";
 import sugarLevelData from "./data/sugarLevel.json";
 import iceLevelData from "./data/iceLevel.json";
+import teasData from "./data/teas.json";
+import milksData from "./data/milks.json";
+import flavorsData from "./data/flavors.json";
+import ingredientsData from "./data/ingredients.json";
+import toppingsData from "./data/toppings.json";
+import sizesData from "./data/sizes.json";
+import cupsData from "./data/cups.json";
 const prisma = new PrismaClient();
 
 const seed = async () => {
@@ -20,37 +27,137 @@ const seed = async () => {
     }
     console.log("Seeding users completed.");
 
+    // Seed Teas
+    for (let i = 0; i < teasData.length; i++) {
+      const teaData = teasData[i];
+      await prisma.tea.create({
+        data: {
+          name: teaData.name,
+          price: teaData.price,
+        },
+      });
+    }
+    console.log("Seeding teas completed.");
+
+    // Seed Milks
+    for (let i = 0; i < milksData.length; i++) {
+      const milkData = milksData[i];
+      await prisma.milk.create({
+        data: {
+          name: milkData.name,
+          price: milkData.price,
+        },
+      });
+    }
+    console.log("Seeding milks completed.");
+
+    // Seed Flavors
+    for (let i = 0; i < flavorsData.length; i++) {
+      const flavorData = flavorsData[i];
+      await prisma.flavor.create({
+        data: {
+          name: flavorData.name,
+        },
+      });
+    }
+    console.log("Seeding flavors completed.");
+
+    // Seed Toppings
+    for (let i = 0; i < toppingsData.length; i++) {
+      const toppingData = toppingsData[i];
+      await prisma.topping.create({
+        data: {
+          name: toppingData.name,
+          price: toppingData.price,
+        },
+      });
+    }
+    console.log("Seeding toppings completed.");
+
+    //Seed Ingredients
+    for (let i = 0; i < ingredientsData.length; i++) {
+      const ingredientData = ingredientsData[i];
+      await prisma.ingredient.create({
+        data: {
+          teaId: ingredientData.teaId,
+          milkId: ingredientData.milkId,
+          flavorId: ingredientData.flavorId,
+          toppingId: ingredientData.toppingId,
+        },
+      });
+    }
+    console.log("Seeding ingredients completed.");
+
+    //Seed Size
+    for (let i = 0; i < sizesData.length; i++) {
+      const sizeData = sizesData[i];
+      await prisma.size.create({
+        data: {
+          name: sizeData.name,
+          price: sizeData.price,
+        },
+      });
+    }
+    console.log("Seeding sizes completed.");
+
     // Seed Menu Items
     for (let i = 0; i < menuItemsData.length; i++) {
       const menuItemData = menuItemsData[i];
+      const { name, imgURL, description, ingredientId, sizeId } = menuItemData;
       await prisma.menuItem.create({
-        data: menuItemData,
+        data: {
+          name,
+          imgURL,
+          description,
+          size: {
+            connect: { id: sizeId },
+          },
+          ingredient: {
+            connect: { id: ingredientId },
+          },
+        },
       });
     }
     console.log("Seeding menu items completed.");
 
-    //Seed Sugar
+    // Seed Sugar Levels
     for (let i = 0; i < sugarLevelData.length; i++) {
-      const sugarLevelsData = sugarLevelData[i];
+      const sugarLevel = sugarLevelData[i];
       await prisma.sugarLevel.create({
-        data: sugarLevelsData,
+        data: sugarLevel,
       });
     }
+    console.log("Seeding sugar levels completed.");
 
-    //Seed Ice
+    // Seed Ice Levels
     for (let i = 0; i < iceLevelData.length; i++) {
-      const iceLevelsData = iceLevelData[i];
+      const iceLevel = iceLevelData[i];
       await prisma.iceLevel.create({
-        data: iceLevelsData,
+        data: iceLevel,
       });
     }
     console.log("Seeding ice levels completed.");
 
-    //Seed Orders
+    //Seed Cups
+    for (let i = 0; i < cupsData.length; i++) {
+      const cupData = cupsData[i];
+      await prisma.cup.create({
+        data: cupData,
+      });
+    }
+    console.log("Seeding cups completed.");
+
+    // Seed Orders
     for (let i = 0; i < ordersData.length; i++) {
       const orderData = ordersData[i];
       await prisma.order.create({
-        data: orderData,
+        data: {
+          userId: orderData.userId,
+          menuItemId: orderData.menuItemId,
+          sugarLevelId: orderData.sugarLevelId,
+          iceLevelId: orderData.iceLevelId,
+          cupId: orderData.cupId,
+        },
       });
     }
     console.log("Seeding orders completed.");

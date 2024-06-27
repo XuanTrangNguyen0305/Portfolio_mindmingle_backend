@@ -1,42 +1,66 @@
 [
   {
-    "name": "Classic Milk Tea",
-    "imgURL": "https://picsum.photos/200/300?random=1"
+    "name": "Strawberry Milk Tea",
+    "imgURL": "https://picsum.photos/200/300?random=7",
+    "description": "A fruity and creamy milk tea infused with fresh strawberries.",
+    "ingredientId": 1,
+    "sizeId": 1,
+    "price": 4.99
   },
   {
     "name": "Taro Milk Tea",
-    "imgURL": "https://picsum.photos/200/300?random=2"
+    "imgURL": "https://picsum.photos/200/300?random=2",
+    "description": "A creamy and flavorful milk tea infused with taro root essence.",
+    "ingredientId": 2,
+    "sizeId": 2,
+    "price": 5.49
   },
   {
     "name": "Matcha Milk Tea",
-    "imgURL": "https://picsum.photos/200/300?random=3"
-  },
-  {
-    "name": "Brown Sugar Milk Tea",
-    "imgURL": "https://picsum.photos/200/300?random=4"
+    "imgURL": "https://picsum.photos/200/300?random=3",
+    "description": "An antioxidant-rich blend of matcha green tea and milk.",
+    "ingredientId": 3,
+    "sizeId": 1,
+    "price": 5.99
   },
   {
     "name": "Honeydew Milk Tea",
-    "imgURL": "https://picsum.photos/200/300?random=5"
+    "imgURL": "https://picsum.photos/200/300?random=5",
+    "description": "A refreshing milk tea with the essence of honeydew melon.",
+    "ingredientId": 4,
+    "sizeId": 3,
+    "price": 4.79
   },
   {
-    "name": "Thai Milk Tea",
-    "imgURL": "https://picsum.photos/200/300?random=6"
-  },
-  {
-    "name": "Strawberry Milk Tea",
-    "imgURL": "https://picsum.photos/200/300?random=7"
+    "name": "Sakura Milk Tea",
+    "imgURL": "https://picsum.photos/200/300?random=8",
+    "description": "A delightful milk tea with the subtle and sweet flavor of sakura.",
+    "ingredientId": 5,
+    "sizeId": 2,
+    "price": 5.29
   },
   {
     "name": "Mango Milk Tea",
-    "imgURL": "https://picsum.photos/200/300?random=8"
+    "imgURL": "https://picsum.photos/200/300?random=9",
+    "description": "A tropical delight combining mango puree with milk tea.",
+    "ingredientId": 6,
+    "sizeId": 1,
+    "price": 4.99
   },
   {
-    "name": "Oolong Milk Tea",
-    "imgURL": "https://picsum.photos/200/300?random=9"
+    "name": "Chocolate Milk Tea",
+    "imgURL": "https://picsum.photos/200/300?random=10",
+    "description": "A rich and creamy milk tea with a chocolatey twist.",
+    "ingredientId": 7,
+    "sizeId": 3,
+    "price": 5.79
   },
   {
-    "name": "Almond Milk Tea",
-    "imgURL": "https://picsum.photos/200/300?random=10"
+    "name": "Vanilla Milk Tea",
+    "imgURL": "https://picsum.photos/200/300?random=11",
+    "description": "A smooth and creamy milk tea with a hint of vanilla.",
+    "ingredientId": 8,
+    "sizeId": 1,
+    "price": 4.49
   }
 ]

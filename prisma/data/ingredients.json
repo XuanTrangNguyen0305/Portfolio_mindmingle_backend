@@ -1,0 +1,50 @@
+[
+  {
+    "teaId": 1,
+    "milkId": 1,
+    "flavorId": 5,
+    "toppingId": 1
+  },
+  {
+    "teaId": 1,
+    "milkId": 1,
+    "flavorId": 2,
+    "toppingId": 1
+  },
+  {
+    "teaId": 2,
+    "milkId": 1,
+    "flavorId": 3,
+    "toppingId": 1
+  },
+  {
+    "teaId": 1,
+    "milkId": 1,
+    "flavorId": 4,
+    "toppingId": 1
+  },
+  {
+    "teaId": 2,
+    "milkId": 1,
+    "flavorId": 1,
+    "toppingId": 1
+  },
+  {
+    "teaId": 1,
+    "milkId": 1,
+    "flavorId": 6,
+    "toppingId": 1
+  },
+  {
+    "teaId": 1,
+    "milkId": 1,
+    "flavorId": 7,
+    "toppingId": 1
+  },
+  {
+    "teaId": 1,
+    "milkId": 1,
+    "flavorId": 8,
+    "toppingId": 1
+  }
+]
