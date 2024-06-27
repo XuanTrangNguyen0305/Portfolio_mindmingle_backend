@@ -22,17 +22,15 @@ model MenuItem {
   description  String
   ingredientId Int
   ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
-  sizeId       Int
-  size         Size       @relation(fields: [sizeId], references: [id])
   price        Float?
   Order        Order[]
 }
 
 model Size {
-  id       Int        @id @default(autoincrement())
-  name     String
-  price    Float?
-  MenuItem MenuItem[]
+  id    Int     @id @default(autoincrement())
+  name  String
+  price Float?
+  Order Order[]
 }
 
 model Ingredient {
@@ -105,5 +103,7 @@ model Order {
   iceLevel     IceLevel   @relation(fields: [iceLevelId], references: [id])
   cupId        Int
   cup          Cup        @relation(fields: [cupId], references: [id])
+  sizeId       Int
+  size         Size       @relation(fields: [sizeId], references: [id])
   iceLevelId   Int
 }

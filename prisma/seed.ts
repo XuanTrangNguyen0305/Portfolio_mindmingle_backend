@@ -103,15 +103,12 @@ const seed = async () => {
     // Seed Menu Items
     for (let i = 0; i < menuItemsData.length; i++) {
       const menuItemData = menuItemsData[i];
-      const { name, imgURL, description, ingredientId, sizeId } = menuItemData;
+      const { name, imgURL, description, ingredientId } = menuItemData;
       await prisma.menuItem.create({
         data: {
           name,
           imgURL,
           description,
-          size: {
-            connect: { id: sizeId },
-          },
           ingredient: {
             connect: { id: ingredientId },
           },
@@ -157,6 +154,7 @@ const seed = async () => {
           sugarLevelId: orderData.sugarLevelId,
           iceLevelId: orderData.iceLevelId,
           cupId: orderData.cupId,
+          sizeId: orderData.sizeId,
         },
       });
     }

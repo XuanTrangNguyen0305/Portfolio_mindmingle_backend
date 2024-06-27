@@ -4,27 +4,31 @@
     "menuItemId": 1,
     "sugarLevelId": 2,
     "iceLevelId": 2,
-    "cupId": 1
+    "cupId": 1,
+    "sizeId": 1
   },
   {
     "userId": 2,
     "menuItemId": 2,
     "sugarLevelId": 3,
     "iceLevelId": 1,
-    "cupId": 2
+    "cupId": 2,
+    "sizeId": 2
   },
   {
     "userId": 3,
     "menuItemId": 3,
     "sugarLevelId": 1,
     "iceLevelId": 3,
-    "cupId": 3
+    "cupId": 3,
+    "sizeId": 3
   },
   {
     "userId": 1,
     "menuItemId": 4,
     "sugarLevelId": 2,
     "iceLevelId": 1,
-    "cupId": 4
+    "cupId": 4,
+    "sizeId": 1
   }
 ]
