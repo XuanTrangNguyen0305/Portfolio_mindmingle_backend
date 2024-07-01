@@ -3,10 +3,10 @@ import express, { json } from "express";
 import { PrismaClient } from "@prisma/client";
 import { toToken } from "./auth/jwt";
 import { AuthMiddleware, AuthRequest } from "./auth/middleware";
-
+import { z } from "zod";
 const app = express();
-const port = 3001;
 app.use(cors());
+const port = 3001;
 app.use(json());
 
 const prisma = new PrismaClient();
@@ -57,21 +57,118 @@ app.post("/register", async (req, res) => {
   }
 });
 
-//GET/ ALL MENU ITEMS
-app.get("/menu-items", async (req, res) => {
+const orderCreateValidator = z
+  .object({
+    sugarLevelId: z.number().int().positive(),
+    iceLevelId: z.number().int().positive(),
+    cupId: z.number().int().positive(),
+    sizeId: z.number().int().positive(),
+    teaId: z.number().int().positive(),
+    milkId: z.number().int().positive(),
+    flavorId: z.number().int().positive(),
+    toppingId: z.number().int().positive(),
+  })
+  .strict();
+
+//GET/orders
+app.get("/orders", async (req, res) => {
+  const allOrders = await prisma.order.findMany({
+    select: {
+      id: true,
+      user: {
+        select: {
+          username: true,
+        },
+      },
+      sugarLevel: true,
+      cup: true,
+      size: true,
+      iceLevel: true,
+      topping: true,
+      tea: true,
+      milk: true,
+      flavor: true,
+    },
+  });
+  res.send(allOrders);
+});
+
+//GET/data for order
+app.get("/options", async (req, res) => {
+  const allIce = await prisma.iceLevel.findMany();
+  const allSize = await prisma.size.findMany();
+  const allCup = await prisma.cup.findMany();
+  const allSugar = await prisma.cup.findMany();
+  const allFlavor = await prisma.flavor.findMany();
+  const allTopping = await prisma.topping.findMany();
+  const allTea = await prisma.tea.findMany();
+  const allMilk = await prisma.milk.findMany();
+  const result = {
+    iceLevels: allIce,
+    sizes: allSize,
+    cups: allCup,
+    sugarLevels: allSugar,
+    flavors: allFlavor,
+    toppings: allTopping,
+    teas: allTea,
+    milk: allMilk,
+  };
+  res.send(result);
+});
+
+//GET/MY-ORDERS
+app.get("/my-orders", AuthMiddleware, async (req: AuthRequest, res) => {
   try {
-    const allMenuItems = await prisma.menuItem.findMany({
+    const { userId } = req;
+    const userItems = await prisma.order.findMany({
+      where: {
+        userId: userId,
+      },
       select: {
         id: true,
-        name: true,
-        imgURL: true,
+        teaId: true,
+        milkId: true,
+        sugarLevelId: true,
+        iceLevelId: true,
+        cupId: true,
+        sizeId: true,
       },
     });
-    console.log("All menu's items fetch successfully:", allMenuItems);
-    res.send(allMenuItems);
+    res.status(200).json(userItems);
   } catch (error) {
-    console.error("Error fetching menu items:", error);
-    res.status(500).send({ message: "Something went wrong" });
+    console.error("Error fetching user's orders", error);
+    res.status(500).send("Failed to fetch user's orders");
+  }
+});
+
+//POST/orders
+app.post("/orders", AuthMiddleware, async (req: AuthRequest, res) => {
+  const reqBody = req.body;
+  if (!req.userId) {
+    res.status(500).send("Something went horribly wrong");
+    return;
+  } //it's sick,you have to do this (sth)
+  const validatedOrder = orderCreateValidator.safeParse(reqBody);
+  if (validatedOrder.success) {
+    try {
+      const newOrder = await prisma.order.create({
+        data: {
+          userId: req.userId,
+          ...validatedOrder.data,
+        },
+      });
+      res
+        .status(201)
+        .send({ message: "Order created successfully", order: newOrder });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Something went wrong while creating the item");
+    }
+  } else {
+    res.status(400).send({
+      message: "Wrong body data",
+      error: validatedOrder.error?.flatten,
+    });
   }
 });
 

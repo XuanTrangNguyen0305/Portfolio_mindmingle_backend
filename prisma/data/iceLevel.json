@@ -1,1 +1,6 @@
-[{ "name": "No Ice" }, { "name": "Less Ice" }, { "name": "Regular Ice" }]
+[
+  { "name": "❌ No Ice" },
+  { "name": "🧊 Less Ice" },
+  { "name": "🧊🧊 Regular Ice" },
+  { "name": "🧊🧊🧊 Extra Ice" }
+]

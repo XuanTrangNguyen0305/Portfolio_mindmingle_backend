@@ -1,34 +1,46 @@
 [
   {
     "userId": 1,
-    "menuItemId": 1,
     "sugarLevelId": 2,
     "iceLevelId": 2,
     "cupId": 1,
-    "sizeId": 1
+    "sizeId": 1,
+    "teaId": 2,
+    "milkId": 1,
+    "flavorId": 3,
+    "toppingId": 1
   },
   {
     "userId": 2,
-    "menuItemId": 2,
     "sugarLevelId": 3,
     "iceLevelId": 1,
     "cupId": 2,
-    "sizeId": 2
+    "sizeId": 2,
+    "teaId": 1,
+    "milkId": 1,
+    "flavorId": 4,
+    "toppingId": 1
   },
   {
     "userId": 3,
-    "menuItemId": 3,
     "sugarLevelId": 1,
     "iceLevelId": 3,
     "cupId": 3,
-    "sizeId": 3
+    "sizeId": 3,
+    "teaId": 1,
+    "milkId": 1,
+    "flavorId": 6,
+    "toppingId": 1
   },
   {
     "userId": 1,
-    "menuItemId": 4,
     "sugarLevelId": 2,
     "iceLevelId": 1,
     "cupId": 4,
-    "sizeId": 1
+    "sizeId": 1,
+    "teaId": 2,
+    "milkId": 1,
+    "flavorId": 3,
+    "toppingId": 1
   }
 ]

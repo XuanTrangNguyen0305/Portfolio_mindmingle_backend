@@ -1,13 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 import usersData from "./data/users.json";
 import ordersData from "./data/orders.json";
-import menuItemsData from "./data/menuItems.json";
 import sugarLevelData from "./data/sugarLevel.json";
 import iceLevelData from "./data/iceLevel.json";
 import teasData from "./data/teas.json";
 import milksData from "./data/milks.json";
 import flavorsData from "./data/flavors.json";
-import ingredientsData from "./data/ingredients.json";
 import toppingsData from "./data/toppings.json";
 import sizesData from "./data/sizes.json";
 import cupsData from "./data/cups.json";
@@ -74,20 +72,6 @@ const seed = async () => {
     }
     console.log("Seeding toppings completed.");
 
-    //Seed Ingredients
-    for (let i = 0; i < ingredientsData.length; i++) {
-      const ingredientData = ingredientsData[i];
-      await prisma.ingredient.create({
-        data: {
-          teaId: ingredientData.teaId,
-          milkId: ingredientData.milkId,
-          flavorId: ingredientData.flavorId,
-          toppingId: ingredientData.toppingId,
-        },
-      });
-    }
-    console.log("Seeding ingredients completed.");
-
     //Seed Size
     for (let i = 0; i < sizesData.length; i++) {
       const sizeData = sizesData[i];
@@ -99,23 +83,6 @@ const seed = async () => {
       });
     }
     console.log("Seeding sizes completed.");
-
-    // Seed Menu Items
-    for (let i = 0; i < menuItemsData.length; i++) {
-      const menuItemData = menuItemsData[i];
-      const { name, imgURL, description, ingredientId } = menuItemData;
-      await prisma.menuItem.create({
-        data: {
-          name,
-          imgURL,
-          description,
-          ingredient: {
-            connect: { id: ingredientId },
-          },
-        },
-      });
-    }
-    console.log("Seeding menu items completed.");
 
     // Seed Sugar Levels
     for (let i = 0; i < sugarLevelData.length; i++) {
@@ -148,14 +115,7 @@ const seed = async () => {
     for (let i = 0; i < ordersData.length; i++) {
       const orderData = ordersData[i];
       await prisma.order.create({
-        data: {
-          userId: orderData.userId,
-          menuItemId: orderData.menuItemId,
-          sugarLevelId: orderData.sugarLevelId,
-          iceLevelId: orderData.iceLevelId,
-          cupId: orderData.cupId,
-          sizeId: orderData.sizeId,
-        },
+        data: orderData,
       });
     }
     console.log("Seeding orders completed.");
