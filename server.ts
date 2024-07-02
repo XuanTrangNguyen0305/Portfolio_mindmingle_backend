@@ -70,29 +70,6 @@ const orderCreateValidator = z
   })
   .strict();
 
-//GET/orders
-app.get("/orders", async (req, res) => {
-  const allOrders = await prisma.order.findMany({
-    select: {
-      id: true,
-      user: {
-        select: {
-          username: true,
-        },
-      },
-      sugarLevel: true,
-      cup: true,
-      size: true,
-      iceLevel: true,
-      topping: true,
-      tea: true,
-      milk: true,
-      flavor: true,
-    },
-  });
-  res.send(allOrders);
-});
-
 //GET/data for order
 app.get("/options", async (req, res) => {
   const allIce = await prisma.iceLevel.findMany();
@@ -116,44 +93,15 @@ app.get("/options", async (req, res) => {
   res.send(result);
 });
 
-//GET/MY-ORDERS
-app.get("/my-orders", AuthMiddleware, async (req: AuthRequest, res) => {
-  try {
-    const { userId } = req;
-    const userItems = await prisma.order.findMany({
-      where: {
-        userId: userId,
-      },
-      select: {
-        id: true,
-        teaId: true,
-        milkId: true,
-        sugarLevelId: true,
-        iceLevelId: true,
-        cupId: true,
-        sizeId: true,
-      },
-    });
-    res.status(200).json(userItems);
-  } catch (error) {
-    console.error("Error fetching user's orders", error);
-    res.status(500).send("Failed to fetch user's orders");
-  }
-});
-
 //POST/orders
-app.post("/orders", AuthMiddleware, async (req: AuthRequest, res) => {
+app.post("/orders", async (req, res) => {
   const reqBody = req.body;
-  if (!req.userId) {
-    res.status(500).send("Something went horribly wrong");
-    return;
-  } //it's sick,you have to do this (sth)
+
   const validatedOrder = orderCreateValidator.safeParse(reqBody);
   if (validatedOrder.success) {
     try {
       const newOrder = await prisma.order.create({
         data: {
-          userId: req.userId,
           ...validatedOrder.data,
         },
       });
@@ -167,8 +115,32 @@ app.post("/orders", AuthMiddleware, async (req: AuthRequest, res) => {
   } else {
     res.status(400).send({
       message: "Wrong body data",
-      error: validatedOrder.error?.flatten,
+      error: validatedOrder.error?.flatten(),
     });
+  }
+});
+
+//GET/orders
+app.get("/orders", async (req, res) => {
+  try {
+    const allOrders = await prisma.order.findMany({
+      select: {
+        id: true,
+        cupId: true,
+        iceLevelId: true,
+        sugarLevelId: true,
+        sizeId: true,
+        flavorId: true,
+        teaId: true,
+        milkId: true,
+        toppingId: true,
+      },
+    });
+    console.log("All orders:", allOrders); // Add logging
+    res.send(allOrders);
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    res.status(500).send({ message: "Something went wrong" });
   }
 });
 

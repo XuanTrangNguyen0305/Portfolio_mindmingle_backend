@@ -111,14 +111,14 @@ const seed = async () => {
     }
     console.log("Seeding cups completed.");
 
-    // Seed Orders
-    for (let i = 0; i < ordersData.length; i++) {
-      const orderData = ordersData[i];
-      await prisma.order.create({
-        data: orderData,
-      });
-    }
-    console.log("Seeding orders completed.");
+    // // Seed Orders
+    // for (let i = 0; i < ordersData.length; i++) {
+    //   const orderData = ordersData[i];
+    //   await prisma.order.create({
+    //     data: orderData,
+    //   });
+    // }
+    // console.log("Seeding orders completed.");
 
     console.log("Database seeding completed.");
   } catch (error) {
