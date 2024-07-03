@@ -131,7 +131,7 @@ app.get("/orders", async (req, res) => {
         sugarLevel: { select: { name: true } },
         size: { select: { name: true, price: true } },
         flavor: { select: { name: true } },
-        tea: { select: { name: true } },
+        tea: { select: { name: true, price: true } },
         milk: { select: { name: true, price: true } },
         topping: { select: { name: true } },
       },

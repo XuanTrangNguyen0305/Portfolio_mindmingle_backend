@@ -1,5 +1,9 @@
 [
   {
+    "name": "No Milk",
+    "price": 0
+  },
+  {
     "name": "Regular Milk",
     "price": 0
   },
