@@ -75,7 +75,7 @@ app.get("/options", async (req, res) => {
   const allIce = await prisma.iceLevel.findMany();
   const allSize = await prisma.size.findMany();
   const allCup = await prisma.cup.findMany();
-  const allSugar = await prisma.cup.findMany();
+  const allSugar = await prisma.sugarLevel.findMany();
   const allFlavor = await prisma.flavor.findMany();
   const allTopping = await prisma.topping.findMany();
   const allTea = await prisma.tea.findMany();
@@ -126,14 +126,14 @@ app.get("/orders", async (req, res) => {
     const allOrders = await prisma.order.findMany({
       select: {
         id: true,
-        cupId: true,
-        iceLevelId: true,
-        sugarLevelId: true,
-        sizeId: true,
-        flavorId: true,
-        teaId: true,
-        milkId: true,
-        toppingId: true,
+        cup: { select: { name: true, price: true } },
+        iceLevel: { select: { name: true } },
+        sugarLevel: { select: { name: true } },
+        size: { select: { name: true, price: true } },
+        flavor: { select: { name: true } },
+        tea: { select: { name: true } },
+        milk: { select: { name: true, price: true } },
+        topping: { select: { name: true } },
       },
     });
     console.log("All orders:", allOrders); // Add logging
