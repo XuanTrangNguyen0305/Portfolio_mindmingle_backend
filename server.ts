@@ -94,36 +94,51 @@ app.get("/options", async (req, res) => {
 });
 
 //POST/orders
-app.post("/orders", async (req, res) => {
+app.post("/orders", AuthMiddleware, async (req: AuthRequest, res) => {
+  const { userId } = req;
   const reqBody = req.body;
 
+  if (!userId) {
+    return res.status(401).send({
+      message: "User ID is missing",
+    });
+  }
+
   const validatedOrder = orderCreateValidator.safeParse(reqBody);
-  if (validatedOrder.success) {
-    try {
-      const newOrder = await prisma.order.create({
-        data: {
-          ...validatedOrder.data,
-        },
-      });
-      res
-        .status(201)
-        .send({ message: "Order created successfully", order: newOrder });
-    } catch (error) {
-      console.error(error);
-      res.status(500).send("Something went wrong while creating the item");
-    }
-  } else {
-    res.status(400).send({
-      message: "Wrong body data",
-      error: validatedOrder.error?.flatten(),
+  if (!validatedOrder.success) {
+    return res.status(400).send({
+      message: "Validation failed",
+      errors: validatedOrder.error.flatten(),
+    });
+  }
+
+  try {
+    const newOrder = await prisma.order.create({
+      data: {
+        userId: userId,
+        ...validatedOrder.data,
+      },
+    });
+    res
+      .status(201)
+      .send({ message: "Order created successfully", order: newOrder });
+  } catch (error) {
+    console.error("Error creating order:", error);
+    res.status(500).send({
+      message: "Internal server error",
+      error: error.message,
     });
   }
 });
 
 //GET/orders
-app.get("/orders", async (req, res) => {
+app.get("/orders", AuthMiddleware, async (req: AuthRequest, res) => {
   try {
-    const allOrders = await prisma.order.findMany({
+    const { userId } = req;
+    const userOrders = await prisma.order.findMany({
+      where: {
+        userId: userId,
+      },
       select: {
         id: true,
         cup: { select: { name: true, price: true } },
@@ -136,8 +151,9 @@ app.get("/orders", async (req, res) => {
         topping: { select: { name: true } },
       },
     });
-    console.log("All orders:", allOrders); // Add logging
-    res.send(allOrders);
+    res.status(200).json(userOrders);
+    // console.log("All orders:", userOrders); // Add logging
+    // res.send(userOrders);
   } catch (error) {
     console.error("Error fetching orders:", error);
     res.status(500).send({ message: "Something went wrong" });

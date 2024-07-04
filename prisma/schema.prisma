@@ -17,8 +17,6 @@ model User {
 
 model Order {
   id           Int        @id @default(autoincrement())
-  // user         User       @relation(fields: [userId], references: [id])
-  // userId       Int
   sugarLevel   SugarLevel @relation(fields: [sugarLevelId], references: [id])
   sugarLevelId Int
   cup          Cup        @relation(fields: [cupId], references: [id])
@@ -35,7 +33,6 @@ model Order {
   milkId       Int
   flavor       Flavor     @relation(fields: [flavorId], references: [id])
   flavorId     Int
-  // User         User       @relation(fields: [userId], references: [id])
   User         User?      @relation(fields: [userId], references: [id])
   userId       Int?
 }

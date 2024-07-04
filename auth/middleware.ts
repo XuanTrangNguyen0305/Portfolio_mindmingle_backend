@@ -28,7 +28,7 @@ export const AuthMiddleware = async (
       // If successful, we call the actual route
       next();
     } catch (e) {
-      res.status(401).send({ message: "Token missing or invalid" });
+      res.status(401).send({ message: "Token missing " });
       return;
     }
   } else {
