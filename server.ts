@@ -4,9 +4,13 @@ import { PrismaClient } from "@prisma/client";
 import { toToken } from "./auth/jwt";
 import { AuthMiddleware, AuthRequest } from "./auth/middleware";
 import { z } from "zod";
+import dotenv from "dotenv";
+
+dotenv.config();
+
 const app = express();
 app.use(cors());
-const port = 3001;
+const port = process.env.PORT || 3001;
 app.use(json());
 
 const prisma = new PrismaClient();
@@ -70,6 +74,11 @@ const orderCreateValidator = z
   })
   .strict();
 
+app.get("/greeting", (req, res) => {
+  const messageFromEnv = process.env.MESSAGE;
+  res.send(messageFromEnv);
+});
+
 //GET/data for order
 app.get("/options", async (req, res) => {
   const allIce = await prisma.iceLevel.findMany();
@@ -126,7 +135,7 @@ app.post("/orders", AuthMiddleware, async (req: AuthRequest, res) => {
     console.error("Error creating order:", error);
     res.status(500).send({
       message: "Internal server error",
-      error: error.message,
+      // error: error && "message" in error && error.message,
     });
   }
 });

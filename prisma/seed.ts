@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import usersData from "./data/users.json";
-import ordersData from "./data/orders.json";
+// import ordersData from "./data/orders.json";
 import sugarLevelData from "./data/sugarLevel.json";
 import iceLevelData from "./data/iceLevel.json";
 import teasData from "./data/teas.json";
@@ -9,6 +9,8 @@ import flavorsData from "./data/flavors.json";
 import toppingsData from "./data/toppings.json";
 import sizesData from "./data/sizes.json";
 import cupsData from "./data/cups.json";
+import dotenv from "dotenv";
+dotenv.config();
 const prisma = new PrismaClient();
 
 const seed = async () => {
