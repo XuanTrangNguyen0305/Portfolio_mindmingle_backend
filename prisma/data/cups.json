@@ -4,15 +4,11 @@
     "price": 0
   },
   {
-    "name": "Panda Cup",
-    "price": 0.5
+    "name": "Panda Bottle",
+    "price": 3
   },
   {
-    "name": "Bear Bottle",
-    "price": 0.5
-  },
-  {
-    "name": "Boba Cup with Surprise Present",
-    "price": 4
+    "name": "Rubber Druck Bottle ",
+    "price": 3
   }
 ]

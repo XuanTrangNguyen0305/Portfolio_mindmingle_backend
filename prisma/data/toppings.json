@@ -1,18 +1,14 @@
 [
   {
-    "name": "Tapioca Pearls",
-    "price": 0.5
+    "name": "Moon & Star Pearls",
+    "price": 0.75
   },
   {
-    "name": "Pudding",
-    "price": 0.5
+    "name": "Flan Pudding",
+    "price": 1
   },
   {
-    "name": "Red Bean",
-    "price": 0.5
-  },
-  {
-    "name": "Mini Mochi",
-    "price": 0.5
+    "name": "Mini Miffy Mochi",
+    "price": 2
   }
 ]
