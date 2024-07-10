@@ -169,4 +169,27 @@ app.get("/orders", AuthMiddleware, async (req: AuthRequest, res) => {
   }
 });
 
+app.delete("/orders/:id", AuthMiddleware, async (req: AuthRequest, res) => {
+  const idFromReq = Number(req.params.id);
+  const user = req.userId;
+
+  if (isNaN(idFromReq)) {
+    res.status(400).send();
+    return;
+  }
+
+  const orderToDelete = await prisma.order.findUnique({
+    where: { id: idFromReq, userId: user },
+  });
+
+  if (orderToDelete === null) {
+    res.status(404).send();
+    return;
+  }
+
+  await prisma.order.delete({
+    where: { id: idFromReq },
+  });
+  res.status(200).send({ message: "Order was deleted" });
+});
 app.listen(port, () => console.log(`⚡ Listening on port: ${port}`));
