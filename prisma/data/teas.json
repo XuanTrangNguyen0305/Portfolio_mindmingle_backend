@@ -1,18 +1,22 @@
 [
   {
     "name": "Black Tea",
-    "price": 3.5
+    "price": 3.5,
+    "description": "A robust and flavorful tea with a strong, full-bodied taste. Perfect for a morning boost or an afternoon pick-me-up."
   },
   {
     "name": "Green Tea",
-    "price": 4.0
+    "price": 4.0,
+    "description": "A light and refreshing tea with a subtle, grassy flavor. Known for its numerous health benefits and antioxidants."
   },
   {
     "name": "Butterfly Pea Tea",
-    "price": 4.5
+    "price": 4.5,
+    "description": "A unique tea with a striking blue color that changes to purple with a splash of lemon. Mild, earthy taste with a hint of floral notes."
   },
   {
     "name": "Hibicus Tea",
-    "price": 3.8
+    "price": 3.8,
+    "description": "A vibrant, tart tea with a rich red color. Enjoyed both hot and cold, it's known for its tangy flavor and potential health benefits."
   }
 ]

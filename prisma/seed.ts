@@ -1,13 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 import usersData from "./data/users.json";
-// import ordersData from "./data/orders.json";
 import sugarLevelData from "./data/sugarLevel.json";
 import iceLevelData from "./data/iceLevel.json";
 import teasData from "./data/teas.json";
 import milksData from "./data/milks.json";
 import flavorsData from "./data/flavors.json";
 import toppingsData from "./data/toppings.json";
-import sizesData from "./data/sizes.json";
 import cupsData from "./data/cups.json";
 import dotenv from "dotenv";
 dotenv.config();
@@ -34,6 +32,7 @@ const seed = async () => {
         data: {
           name: teaData.name,
           price: teaData.price,
+          description: teaData.description,
         },
       });
     }
@@ -57,6 +56,7 @@ const seed = async () => {
       await prisma.flavor.create({
         data: {
           name: flavorData.name,
+          description: flavorData.description,
         },
       });
     }
@@ -69,22 +69,11 @@ const seed = async () => {
         data: {
           name: toppingData.name,
           price: toppingData.price,
+          description: toppingData.description,
         },
       });
     }
     console.log("Seeding toppings completed.");
-
-    //Seed Size
-    for (let i = 0; i < sizesData.length; i++) {
-      const sizeData = sizesData[i];
-      await prisma.size.create({
-        data: {
-          name: sizeData.name,
-          price: sizeData.price,
-        },
-      });
-    }
-    console.log("Seeding sizes completed.");
 
     // Seed Sugar Levels
     for (let i = 0; i < sugarLevelData.length; i++) {
@@ -112,15 +101,6 @@ const seed = async () => {
       });
     }
     console.log("Seeding cups completed.");
-
-    // // Seed Orders
-    // for (let i = 0; i < ordersData.length; i++) {
-    //   const orderData = ordersData[i];
-    //   await prisma.order.create({
-    //     data: orderData,
-    //   });
-    // }
-    // console.log("Seeding orders completed.");
 
     console.log("Database seeding completed.");
   } catch (error) {

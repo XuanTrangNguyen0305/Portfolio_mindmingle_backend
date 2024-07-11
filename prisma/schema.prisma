@@ -21,8 +21,6 @@ model Order {
   sugarLevelId Int
   cup          Cup        @relation(fields: [cupId], references: [id])
   cupId        Int
-  size         Size       @relation(fields: [sizeId], references: [id])
-  sizeId       Int
   iceLevel     IceLevel   @relation(fields: [iceLevelId], references: [id])
   iceLevelId   Int
   topping      Topping    @relation(fields: [toppingId], references: [id])
@@ -37,25 +35,20 @@ model Order {
   userId       Int?
 }
 
-model Size {
-  id    Int     @id @default(autoincrement())
-  name  String
-  price Float
-  Order Order[]
-}
-
 model Topping {
-  id    Int     @id @default(autoincrement())
-  name  String
-  price Float
-  Order Order[]
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String
+  price       Float
+  Order       Order[]
 }
 
 model Tea {
-  id    Int     @id @default(autoincrement())
-  name  String
-  price Float
-  Order Order[]
+  id          Int     @id @default(autoincrement())
+  name        String
+  price       Float
+  description String
+  Order       Order[]
 }
 
 model Milk {
@@ -66,9 +59,10 @@ model Milk {
 }
 
 model Flavor {
-  id    Int     @id @default(autoincrement())
-  name  String
-  Order Order[]
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String
+  Order       Order[]
 }
 
 model SugarLevel {

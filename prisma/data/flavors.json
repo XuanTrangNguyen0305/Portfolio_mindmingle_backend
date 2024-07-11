@@ -1,17 +1,22 @@
 [
   {
-    "name": "Sakura"
+    "name": "Sakura",
+    "description": "Sakura is a flavor from a flower with the same name in Japan, offering a floral and mildly sweet taste."
   },
   {
-    "name": "Taro"
+    "name": "Taro",
+    "description": "Taro has a creamy and nutty flavor with a hint of vanilla, made from taro root."
   },
   {
-    "name": "Honeydew"
+    "name": "Lychee",
+    "description": "Lychee has a delicate and fragrant sweetness with a hint of floral notes, reminiscent of tropical fruit."
   },
   {
-    "name": "Strawberry"
+    "name": "Yuzu",
+    "description": "Yuzu has a unique citrus flavor with a blend of tartness and sweetness, reminiscent of a cross between grapefruit and mandarin orange."
   },
   {
-    "name": "Mango"
+    "name": "Strawberry",
+    "description": "Strawberry provides a sweet and slightly tart flavor, reminiscent of fresh strawberries."
   }
 ]

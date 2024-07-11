@@ -1,14 +1,17 @@
 [
   {
-    "name": "Moon & Star Pearls",
-    "price": 0.75
+    "name": "Star Boba Pearls",
+    "price": 0.75,
+    "description": "Fun, star-shaped boba pearls that add a whimsical touch to your beverages. These chewy pearls are perfect for creating a playful and delicious drink experience."
   },
   {
     "name": "Flan Pudding",
-    "price": 1
+    "price": 1,
+    "description": "A smooth and creamy custard dessert with a rich caramel topping. A classic treat that's both comforting and indulgent."
   },
   {
     "name": "Mini Miffy Mochi",
-    "price": 2
+    "price": 2,
+    "description": "Soft and chewy rice cakes with a sweet red bean filling, inspired by the beloved Miffy character. A delightful snack that's both cute and delicious."
   }
 ]

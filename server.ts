@@ -66,7 +66,6 @@ const orderCreateValidator = z
     sugarLevelId: z.number().int().positive(),
     iceLevelId: z.number().int().positive(),
     cupId: z.number().int().positive(),
-    sizeId: z.number().int().positive(),
     teaId: z.number().int().positive(),
     milkId: z.number().int().positive(),
     flavorId: z.number().int().positive(),
@@ -82,7 +81,6 @@ app.get("/greeting", (req, res) => {
 //GET/data for order
 app.get("/options", async (req, res) => {
   const allIce = await prisma.iceLevel.findMany();
-  const allSize = await prisma.size.findMany();
   const allCup = await prisma.cup.findMany();
   const allSugar = await prisma.sugarLevel.findMany();
   const allFlavor = await prisma.flavor.findMany();
@@ -91,7 +89,6 @@ app.get("/options", async (req, res) => {
   const allMilk = await prisma.milk.findMany();
   const result = {
     iceLevels: allIce,
-    sizes: allSize,
     cups: allCup,
     sugarLevels: allSugar,
     flavors: allFlavor,
@@ -153,7 +150,6 @@ app.get("/orders", AuthMiddleware, async (req: AuthRequest, res) => {
         cup: { select: { name: true, price: true } },
         iceLevel: { select: { name: true } },
         sugarLevel: { select: { name: true } },
-        size: { select: { name: true, price: true } },
         flavor: { select: { name: true } },
         tea: { select: { name: true, price: true } },
         milk: { select: { name: true, price: true } },
