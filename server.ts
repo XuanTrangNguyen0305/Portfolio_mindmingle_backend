@@ -100,15 +100,15 @@ app.get("/options", async (req, res) => {
 });
 
 //POST/orders
-app.post("/orders", AuthMiddleware, async (req: AuthRequest, res) => {
-  const { userId } = req;
+app.post("/orders", async (req, res) => {
+  // const { userId } = req;
   const reqBody = req.body;
 
-  if (!userId) {
-    return res.status(401).send({
-      message: "User ID is missing",
-    });
-  }
+  // if (!userId) {
+  //   return res.status(401).send({
+  //     message: "User ID is missing",
+  //   });
+  // }
 
   const validatedOrder = orderCreateValidator.safeParse(reqBody);
   if (!validatedOrder.success) {
@@ -121,7 +121,7 @@ app.post("/orders", AuthMiddleware, async (req: AuthRequest, res) => {
   try {
     const newOrder = await prisma.order.create({
       data: {
-        userId: userId,
+        // userId: userId,
         ...validatedOrder.data,
       },
     });
@@ -138,13 +138,13 @@ app.post("/orders", AuthMiddleware, async (req: AuthRequest, res) => {
 });
 
 //GET/orders
-app.get("/orders", AuthMiddleware, async (req: AuthRequest, res) => {
+app.get("/orders", async (req, res) => {
   try {
-    const { userId } = req;
+    // const { userId } = req;
     const userOrders = await prisma.order.findMany({
-      where: {
-        userId: userId,
-      },
+      // where: {
+      //   userId: userId,
+      // },
       select: {
         id: true,
         cup: { select: { name: true, price: true } },
@@ -165,17 +165,18 @@ app.get("/orders", AuthMiddleware, async (req: AuthRequest, res) => {
   }
 });
 
-app.delete("/orders/:id", AuthMiddleware, async (req: AuthRequest, res) => {
+app.delete("/orders/:id", async (req, res) => {
   const idFromReq = Number(req.params.id);
-  const user = req.userId;
+  // const user = req.userId;
 
   if (isNaN(idFromReq)) {
     res.status(400).send();
     return;
   }
 
-  const orderToDelete = await prisma.order.findUnique({
-    where: { id: idFromReq, userId: user },
+  const orderToDelete = await prisma.order.findMany({
+    where: { id: idFromReq },
+    // where: { id: idFromReq, userId: user },
   });
 
   if (orderToDelete === null) {
